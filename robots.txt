@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://goglobal-recruitment.github.io/Goglobal-Recruitment/sitemap.xml
+Sitemap: https://goglobal-recruitment.github.io/Go-Global-Recruitment/sitemap.xml

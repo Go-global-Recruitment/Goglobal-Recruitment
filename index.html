@@ -157,7 +157,7 @@
   <section class="hero">
     <h1>Go‑Global Recruitment</h1>
     <p>Empowering Talent. Enabling Journeys.</p>
-    <button id="installButton" style="margin-top:16px; padding:12px 20px; font-size:1rem; border:none; border-radius:6px; background-color:#003366; color:white; cursor:pointer; display:none;">Install Go-Global App</button>
+    <button id="installButton" style="margin-top:16px; padding:12px 20px; font-size:1rem; border:none; border-radius:6px; background-color:#003366; color:white; cursor:pointer;">Install Go-Global App</button>
   </section>
 
   <div class="section">
@@ -213,21 +213,34 @@
   </script>
   <script>
     let deferredPrompt;
+    let installSupported = false;
     const installBtn = document.getElementById('installButton');
 
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
       deferredPrompt = e;
-      installBtn.style.display = 'inline-block';
+      installSupported = true;
+      // Keep button visible; label stays consistent
+      installBtn.textContent = 'Install Go-Global App';
     });
 
     installBtn.addEventListener('click', async () => {
-      if (!deferredPrompt) return;
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      console.log('User response to install prompt:', outcome);
-      deferredPrompt = null;
-      installBtn.style.display = 'none';
+      if (installSupported && deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        console.log('User response to install prompt:', outcome);
+        deferredPrompt = null;
+        return;
+      }
+      // Fallback guidance when the browser doesn't fire beforeinstallprompt
+      const ua = navigator.userAgent.toLowerCase();
+      const isIOS = /iphone|ipad|ipod/.test(ua);
+      const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+      if (isIOS && isSafari) {
+        alert('On iPhone/iPad: tap Share, then “Add to Home Screen”.');
+      } else {
+        alert('In Chrome/Edge: open browser menu and choose “Install app”.');
+      }
     });
   </script>
 </body>

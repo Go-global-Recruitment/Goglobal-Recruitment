@@ -81,6 +81,8 @@
     .status-orange { color: #f39c12; font-weight: bold; animation: pulse 1.5s infinite; }
     .status-red { color: #e74c3c; font-weight: bold; animation: shake 0.5s; }
     .status-hold { color: #9b59b6; font-weight: bold; animation: pulse 1.5s infinite; }
+    .status-legal { color: #e74c3c; font-weight: bold; }
+    .status-date { color: #f39c12; font-weight: bold; }
 
     @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -134,11 +136,33 @@
       }
     }
 
+    function isDateString(str) {
+      if (!str) return false;
+      const s = String(str).trim();
+      const patterns = [
+        /^\d{4}-\d{2}-\d{2}$/,
+        /^\d{4}\/\d{2}\/\d{2}$/,
+        /^\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4}$/,
+        /^\d{1,2}\s+(jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\.?\s+\d{2,4}$/i,
+      ];
+      if (patterns.some(re => re.test(s))) return true;
+      const ts = Date.parse(s);
+      return !isNaN(ts) && /\d/.test(s) && /[\/\-\s]/.test(s);
+    }
+
     function formatStatus(value) {
       if (!value) return `<span class="status-orange">⏳ Not available</span>`;
-      const val = value.trim().toLowerCase();
+      const raw = value.toString().trim();
+      const val = raw.toLowerCase();
+
+      // Keyword and date-based styling
+      if (val.includes('legal')) return `<span class="status-legal">${value}</span>`;
+      if (val.includes('pending')) return `<span class="status-orange">⏳ ${value}</span>`;
+      if (isDateString(raw)) return `<span class="status-date">${value}</span>`;
+
+      // Exact status categories
       const green = ["yes", "booked", "completed", "accepted", "signed", "scheduled", "submitted"];
-      const orange = ["pending", "awaiting signed contract", "in progress"];
+      const orange = ["awaiting signed contract", "in progress"];
       const red = ["no", "rejected", "not booked", "incomplete", "declined"];
       const hold = ["on hold", "paused", "hold"];
       if (green.includes(val)) return `<span class="status-green">✅ ${value}</span>`;

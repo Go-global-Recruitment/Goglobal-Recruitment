@@ -8,10 +8,10 @@
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://go-global-recruitment.github.io/Goglobal-Recruitment/" />
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#003366">
+  <meta name="theme-color" content="#004aad">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
   
   <!-- Google Search Console -->
   <meta name="google-site-verification" content="1u8_ihw77xsxUmOT4BQJb7b7SkA2OflVCSlfh6us2e0" />
@@ -160,7 +160,9 @@
   <section class="hero">
     <h1>Go‑Global Recruitment</h1>
     <p>Empowering Talent. Enabling Journeys.</p>
-    <button id="installButton" aria-label="Install Go-Global App" style="margin-top:24px; padding:0; background:none; border:none; cursor:pointer;"><img src="icon-192.png" srcset="icon-192.png 192w, icon-512.png 512w" sizes="184px" alt="Go‑Global App logo" style="width:184px; height:184px; object-fit:contain; border:none; box-shadow:none; border-radius:50%;" /></button>
+    <button id="installButton" style="display:none; padding:10px 18px; border:none; background:#004aad; color:#fff; border-radius:8px; cursor:pointer;"> 
+      Install Go-Global App 
+    </button>
   </section>
 
   <div class="section">
@@ -216,28 +218,65 @@
   </script>
   <script>
     let deferredPrompt;
-    const installBtn = document.getElementById('installButton');
+    const installButton = document.getElementById('installButton');
+
+    // Handle install prompt
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
       deferredPrompt = e;
-      installBtn.style.display = 'inline-block';
+      if (installButton) installButton.style.display = 'block';
     });
 
-    // Directly trigger browser install prompt on logo click
-    installBtn.addEventListener('click', async () => {
-      if (!deferredPrompt) return;
-      try {
-        await deferredPrompt.prompt();
-        await deferredPrompt.userChoice;
-        deferredPrompt = null;
-      } catch (error) {
-        console.error('Install error:', error);
-      }
-    });
+    // On click, trigger the install or show fallback
+    if (installButton) {
+      installButton.addEventListener('click', async () => {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          const { outcome } = await deferredPrompt.userChoice;
+          if (outcome === 'accepted') {
+            console.log('User installed app');
+          } else {
+            console.log('User dismissed install');
+          }
+          deferredPrompt = null;
+        } else {
+          // Fallback if install prompt isn't supported
+          showFallbackInstructions();
+        }
+      });
+    }
 
-    window.addEventListener('appinstalled', () => {
-      console.log('PWA installed');
-    });
+    // Register service worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(() => console.log('Service Worker registered'))
+        .catch(err => console.error('SW registration failed:', err));
+    }
+
+    // Fallback popup function
+    function showFallbackInstructions() {
+      const message = `
+        <div id="fallbackPopup" style="
+          position: fixed; top: 20%; left: 50%; transform: translateX(-50%);
+          background: white; color: #333; border: 2px solid #004aad; border-radius: 12px;
+          padding: 20px; width: 90%; max-width: 350px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+          z-index: 10000; text-align: center;
+        ">
+          <h3 style="color:#004aad; margin-bottom:10px;">Add Go-Global App</h3>
+          <p style="font-size:14px;">If your browser doesn't show an install popup:</p>
+          <ol style="text-align:left; font-size:13px;">
+            <li>Tap the <strong>Share</strong> icon in your browser menu.</li>
+            <li>Select <strong>“Add to Home Screen”</strong>.</li>
+            <li>The Go-Global App icon will appear on your screen.</li>
+          </ol>
+          <button onclick="document.getElementById('fallbackPopup').remove()"
+            style="margin-top:10px; padding:8px 15px; background:#004aad; color:#fff; border:none; border-radius:6px;">
+            OK
+          </button>
+        </div>
+      `;
+      document.body.insertAdjacentHTML('beforeend', message);
+    }
   </script>
 </body>
 </html>

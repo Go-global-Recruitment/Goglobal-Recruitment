@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#003366">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="apple-touch-icon" href="icon-192.png">
-
   <meta charset="utf-8" />
   <title>Track Application | Go‑Global Recruitment</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Track your Go‑Global Recruitment application progress by client number. See the status of CV, contracts, bookings, and more.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://go-global-recruitment.github.io/Goglobal-Recruitment/application-tracker.html" />
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#003366">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon" href="icon-192.png">
 
   <style>
     body {
@@ -89,6 +88,7 @@
     .status-hold { color: #9b59b6; font-weight: bold; animation: pulse 1.5s infinite; }
     .status-legal { color: #e74c3c; font-weight: bold; }
     .status-date { color: #f39c12; font-weight: bold; }
+    .status-strong-red { color: #e74c3c; font-weight: bold; }
 
     @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -132,10 +132,10 @@
           <li>Biometrics Booking:<span>${formatStatus(client["Biometrics Booking"])}</span></li>
           <li>Medical Booked:<span>${formatStatus(client["Medical Booked"])}</span></li>
           <li>Psychologist Booking:<span>${formatStatus(client["Psychologist Booking"])}</span></li>
-          <li>Debtform/Schedule:<span class="status-red">${client["Debtform/Schedule"] || 'Not Available'}</span></li>
-          <li>Elites Test Booking:<span>${formatStatus(client["Elites Test Booking"])}</span></li>
-          <li>Start Date:<span>${formatStatus(client["Start Date"])}</span></li>
-          <li><strong>Final Status:</strong><span class="status-red">${client["Final Status"] || 'Pending'}</span></li>
+          <li>Debtform/Schedule:<span class="status-strong-red">${client["Debtform/Schedule"] || ''}</span></li>
+           <li>Elites Test Booking:<span>${formatStatus(client["Elites Test Booking"])}</span></li>
+           <li>Start Date:<span>${formatStatus(client["Start Date"])}</span></li>
+           <li><strong>Final Status:</strong><span class="status-strong-red">${client["Final Status"] || ''}</span></li>
         </ul>`;
       } else {
         out.innerHTML = `<p style="color:red; animation: shake 0.5s;">Client number not found.</p>`;
@@ -161,10 +161,12 @@
       const raw = value.toString().trim();
       const val = raw.toLowerCase();
 
+      // Keyword and date-based styling
       if (val.includes('legal')) return `<span class="status-legal">${value}</span>`;
       if (val.includes('pending')) return `<span class="status-orange">⏳ ${value}</span>`;
       if (isDateString(raw)) return `<span class="status-date">${value}</span>`;
 
+      // Exact status categories
       const green = ["yes", "booked", "completed", "accepted", "signed", "scheduled", "submitted"];
       const orange = ["awaiting signed contract", "in progress"];
       const red = ["no", "rejected", "not booked", "incomplete", "declined"];
@@ -174,6 +176,12 @@
       if (hold.includes(val)) return `<span class="status-hold">⏸️ ${value}</span>`;
       if (orange.includes(val)) return `<span class="status-orange">⏳ ${value}</span>`;
       return `<span>${value}</span>`;
+    }
+    // Register service worker for PWA
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js').catch(err => console.log('SW registration failed', err));
+      });
     }
   </script>
 </head>

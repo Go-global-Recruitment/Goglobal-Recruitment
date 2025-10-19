@@ -7,6 +7,11 @@
   <meta name="description" content="Explore Go‑Global's recruitment expertise across healthcare, mining, logistics, education, and more. Trusted by professionals globally.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://go-global-recruitment.github.io/Goglobal-Recruitment/expertise.html" />
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#003366">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon" href="icon-192.png">
 
   <style>
     body {
@@ -157,5 +162,14 @@
   <footer>
     © 2016 Go‑Global Recruitment
   </footer>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then(reg => console.log('Service Worker registered', reg))
+          .catch(err => console.log('Service Worker failed', err));
+      });
+    }
+  </script>
 </body>
 </html>

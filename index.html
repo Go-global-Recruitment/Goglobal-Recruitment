@@ -7,6 +7,11 @@
   <meta name="description" content="Go‑Global Recruitment connects skilled professionals across Africa with global job opportunities in the UK, Canada, and more. Empowering Talent. Enabling Journeys.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://go-global-recruitment.github.io/Goglobal-Recruitment/" />
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#003366">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon" href="icon-192.png">
   
   <!-- Google Search Console -->
   <meta name="google-site-verification" content="1u8_ihw77xsxUmOT4BQJb7b7SkA2OflVCSlfh6us2e0" />
@@ -152,6 +157,7 @@
   <section class="hero">
     <h1>Go‑Global Recruitment</h1>
     <p>Empowering Talent. Enabling Journeys.</p>
+    <button id="installButton" style="margin-top:16px; padding:12px 20px; font-size:1rem; border:none; border-radius:6px; background-color:#003366; color:white; cursor:pointer; display:none;">Install Go-Global App</button>
   </section>
 
   <div class="section">
@@ -196,5 +202,33 @@
   <footer>
     © 2016 Go‑Global Recruitment. All rights reserved.
   </footer>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then(reg => console.log('Service Worker registered', reg))
+          .catch(err => console.log('Service Worker failed', err));
+      });
+    }
+  </script>
+  <script>
+    let deferredPrompt;
+    const installBtn = document.getElementById('installButton');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.style.display = 'inline-block';
+    });
+
+    installBtn.addEventListener('click', async () => {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      console.log('User response to install prompt:', outcome);
+      deferredPrompt = null;
+      installBtn.style.display = 'none';
+    });
+  </script>
 </body>
 </html>

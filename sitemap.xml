@@ -1,23 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+
   <url>
-    <loc>https://goglobal-recruitment.github.io/Goglobal-Recruitment/</loc>
-    <lastmod>2025-10-18</lastmod>
+    <loc>https://go-global-recruitment.github.io/Goglobal-Recruitment/</loc>
+    <priority>1.0</priority>
   </url>
+
   <url>
-    <loc>https://goglobal-recruitment.github.io/Goglobal-Recruitment/about.html</loc>
-    <lastmod>2025-10-18</lastmod>
+    <loc>https://go-global-recruitment.github.io/Goglobal-Recruitment/about.html</loc>
+    <priority>0.8</priority>
   </url>
+
   <url>
-    <loc>https://goglobal-recruitment.github.io/Goglobal-Recruitment/expertise.html</loc>
-    <lastmod>2025-10-18</lastmod>
+    <loc>https://go-global-recruitment.github.io/Goglobal-Recruitment/expertise.html</loc>
+    <priority>0.8</priority>
   </url>
+
   <url>
-    <loc>https://goglobal-recruitment.github.io/Goglobal-Recruitment/application-tracker.html</loc>
-    <lastmod>2025-10-18</lastmod>
+    <loc>https://go-global-recruitment.github.io/Goglobal-Recruitment/track-application.html</loc>
+    <priority>0.7</priority>
   </url>
+
   <url>
-    <loc>https://goglobal-recruitment.github.io/Goglobal-Recruitment/contact.html</loc>
-    <lastmod>2025-10-18</lastmod>
+    <loc>https://go-global-recruitment.github.io/Goglobal-Recruitment/contact.html</loc>
+    <priority>0.7</priority>
   </url>
+
 </urlset>

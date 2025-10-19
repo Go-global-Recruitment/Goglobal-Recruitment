@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>About Go‑Global Recruitment | Our Mission & Team</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Meet the Go‑Global Recruitment team. Learn about our mission to support job seekers and connect global talent with international employers.">
+
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background-color: #f4f7fb;
+      color: #333;
+      opacity: 0;
+      transition: opacity 0.6s ease-in;
+    }
+    body.fade-in { opacity: 1; }
+
+    header {
+      background-color: #003366;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      height: 50px;
+      max-width: 100%;
+    }
+
+    .banner {
+      background-color: #0047AB;
+      color: white;
+      text-align: center;
+      padding: 1rem 2rem;
+      font-size: 1.8em;
+      font-weight: bold;
+      animation: slideDown 0.8s ease-out;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    nav {
+      background-color: #003366;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      padding: 1rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 2rem;
+    }
+
+    .section {
+      background: white;
+      border-radius: 8px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .flag {
+      width: 20px;
+      height: 15px;
+      vertical-align: middle;
+      margin-left: 6px;
+    }
+
+    .section-title {
+      color: #003366;
+      font-size: 1.6em;
+      margin-bottom: 1rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #003366;
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      nav {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem 0;
+      }
+
+      .banner {
+        font-size: 1.4em;
+        padding: 1rem;
+      }
+
+      nav a {
+        font-size: 1em;
+      }
+    }
+
+    /* Optional: spinning globe */
+    .globe {
+      width: 60px;
+      height: 60px;
+      background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/ef/Rotating_earth_%28large%29.gif');
+      background-size: cover;
+      border-radius: 50%;
+      animation: spin 10s linear infinite;
+      margin: 1rem auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.body.classList.add("fade-in");
+    });
+  </script>
+</head>
+
+<body>
+  <header>
+    <img src="goglobal-logo-header.svg" alt="Go-Global Logo" class="logo" />
+  </header>
+
+  <div class="banner">About Go‑Global Recruitment</div>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="expertise.html">Expertise</a>
+    <a href="application-tracker.html">Track Application</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <div class="container">
+    <div class="globe"></div>
+
+    <div class="section">
+      <h2>Empowering Talent. Enabling Journeys.</h2>
+      <p>We believe that a good efficient team work makes the dream work. Our mission is to create a world where people have access to the right opportunities to thrive. We are passionate experts in helping companies find and hire the best talent.</p>
+      <p>Our multilingual team masters your language and those required for the roles to be filled within your leadership teams. Our experienced recruiters help enterprises and startups understand market nuances, ensuring they make informed hiring decisions.</p>
+    </div>
+
+    <div class="section">
+      <h2>Why Work With Us?</h2>
+      <ul>
+        <li>Our people are problem-solvers who thrive on simplifying complexity.</li>
+        <li>Expertise built from decades of global business experience</li>
+        <li>Accessible support – whenever and wherever you need it</li>
+        <li>A personalized approach to make even the most complex tasks feel seamless</li>
+      </ul>
+      <h3>Here for You</h3>
+      <p>The Team That Makes Global Operations Easy. Our team forms a global network, bringing together compliance specialists and local experts who understand the nuances in every market you do business.</p>
+      <p>When you work with us, you gain a trusted partner dedicated to your growth and success.</p>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">Meet Our Global Managers</h2>
+      <div class="team-member">
+        <p><strong>Oluchi Eze</strong> – Nigeria <img alt="Nigeria" class="flag" src="https://flagcdn.com/ng.svg" /></p>
+        <p><strong>Kwame Mensah</strong> – Ghana <img alt="Ghana" class="flag" src="https://flagcdn.com/gh.svg" /></p>
+        <p><strong>Ben Nzama</strong> – South Africa <img alt="South Africa" class="flag" src="https://flagcdn.com/za.svg" /></p>
+        <p><strong>Tariro Moyo</strong> – Zimbabwe <img alt="Zimbabwe" class="flag" src="https://flagcdn.com/zw.svg" /></p>
+        <p><strong>James Kpodo</strong> – Liberia <img alt="Liberia" class="flag" src="https://flagcdn.com/lr.svg" /></p>
+        <p><strong>Esther Doe</strong> – Liberia <img alt="Liberia" class="flag" src="https://flagcdn.com/lr.svg" /></p>
+        <p><strong>Maria Cruz</strong> – Philippines <img alt="Philippines" class="flag" src="https://flagcdn.com/ph.svg" /></p>
+        <p><strong>Raj Patel</strong> – India <img alt="India" class="flag" src="https://flagcdn.com/in.svg" /></p>
+        <p><strong>Sipho Ndlovu</strong> – Zimbabwe <img alt="Zimbabwe" class="flag" src="https://flagcdn.com/zw.svg" /></p>
+        <p><strong>Shane Donovan</strong> – South Africa <img alt="South Africa" class="flag" src="https://flagcdn.com/za.svg" /></p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    © 2016 Go‑Global Recruitment
+  </footer>
+</body>
+</html>

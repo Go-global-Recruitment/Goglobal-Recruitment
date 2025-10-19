@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Contact Go‑Global Recruitment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Send your message securely to Go‑Global Recruitment. We’ll help you take the next step in your international career."/>
+
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: url('https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=1350&q=80') no-repeat center center / cover;
+      margin: 0;
+      padding: 0;
+      color: white;
+      opacity: 0;
+      transition: opacity 0.6s ease-in;
+    }
+    body.fade-in { opacity: 1; }
+
+    .site-header {
+      background-color: rgba(0, 51, 102, 0.9);
+      padding: 1rem 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .logo-box {
+      display: flex;
+      align-items: center;
+    }
+
+    .site-logo {
+      height: 50px;
+      width: auto;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-menu a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+
+    .nav-menu a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 12px;
+      backdrop-filter: blur(5px);
+    }
+
+    main h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    button {
+      margin-top: 20px;
+      background: #003366;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      width: 100%;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: rgba(0, 51, 102, 0.9);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .nav-menu {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 1rem;
+      }
+
+      main h1 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.body.classList.add("fade-in");
+    });
+  </script>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="logo-box">
+        <a href="index.html">
+          <img src="goglobal-logo-header.svg" alt="Go-Global Logo" class="site-logo" />
+        </a>
+      </div>
+      <nav class="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="expertise.html">Expertise</a>
+        <a href="application-tracker.html">Track Application</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1>Contact Go‑Global Recruitment</h1>
+    <form action="https://formspree.io/f/mvgrvbve" method="POST">
+      <label for="name">Full Name</label>
+      <input type="text" name="name" id="name" required placeholder="John Doe" />
+
+      <label for="email">Email Address</label>
+      <input type="email" name="email" id="email" required placeholder="you@example.com" />
+
+      <label for="message">Message (Optional)</label>
+      <textarea name="message" id="message" rows="4" placeholder="Your message here..."></textarea>
+
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="hidden" name="_next" value="https://goglobal-recruitment.github.io/Go-Global-Recruitment/thank-you.html" />
+
+      <button type="submit">Submit</button>
+    </form>
+  </main>
+
+  <footer>
+    © 2016 Go‑Global Recruitment. All rights reserved.
+  </footer>
+</body>
+</html>

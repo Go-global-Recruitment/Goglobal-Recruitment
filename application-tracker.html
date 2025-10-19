@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Track Application | Go‑Global Recruitment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Track your Go‑Global Recruitment application progress by client number.">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1500&q=80') no-repeat center center / cover;
+      color: #333;
+      opacity: 0;
+      transition: opacity 0.6s ease-in;
+    }
+    body.fade-in { opacity: 1; }
+
+    header, footer {
+      background-color: rgba(0, 51, 102, 0.95);
+      color: white;
+      text-align: center;
+      padding: 1.2rem;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      padding: 1rem;
+      background-color: rgba(0, 51, 102, 0.95);
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+      animation: slideUp 0.6s ease;
+    }
+
+    h2 {
+      color: #003366;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    input[type="text"], button {
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+    }
+
+    input[type="text"] {
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #003366;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    #statusOutput ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    #statusOutput li {
+      padding: 8px 0;
+      border-bottom: 1px solid #ccc;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .status-green { color: #2ecc71; font-weight: bold; animation: fadeIn 1s ease-in-out; }
+    .status-orange { color: #f39c12; font-weight: bold; animation: pulse 1.5s infinite; }
+    .status-red { color: #e74c3c; font-weight: bold; animation: shake 0.5s; }
+    .status-hold { color: #9b59b6; font-weight: bold; animation: pulse 1.5s infinite; }
+
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+    }
+
+    footer {
+      margin-top: 2rem;
+      font-size: 0.95rem;
+    }
+  </style>
+
+  <script>
+    let clients = [];
+
+    document.addEventListener("DOMContentLoaded", () => {
+      document.body.classList.add("fade-in");
+      loadClientData();
+    });
+
+    async function loadClientData() {
+      const res = await fetch("cleaned_application_tracker.csv");
+      const text = await res.text();
+      const rows = text.trim().split("\n");
+
+      // Clean BOM and whitespace from headers
+      const headers = rows[0].replace(/^\uFEFF/, "").split(",").map(h => h.trim());
+
+      clients = rows.slice(1).map(row => {
+        const cols = row.split(",");
+        const client = {};
+        headers.forEach((h, i) => client[h] = cols[i]?.trim() || '');
+        return client;
+      });
+    }
+
+    function searchClient() {
+      const input = document.getElementById("clientInput").value.trim().toLowerCase();
+      const client = clients.find(c => c["Client Application Number"]?.trim().toLowerCase() === input);
+      const out = document.getElementById("statusOutput");
+
+      if (client) {
+        out.innerHTML = `<ul>
+          <li>CV Uploaded:<span>${formatStatus(client["CV Uploaded"])}</span></li>
+          <li>Offer Letter:<span>${formatStatus(client["Offer Letter"])}</span></li>
+          <li>Service Agreement:<span>${formatStatus(client["Go-Global Service Agreement"])}</span></li>
+          <li>Employment Contract:<span>${formatStatus(client["Employment Contract"])}</span></li>
+          <li>Debtform/Schedule:<span>${formatStatus(client["Debtform/Schedule"])}</span></li>
+          <li>Client Service Booking:<span>${formatStatus(client["Client Service booking"])}</span></li>
+          <li>Biometrics Booking:<span>${formatStatus(client["Biometrics Booking"])}</span></li>
+          <li>Medical Booked:<span>${formatStatus(client["Medical Booked"])}</span></li>
+          <li>Psychologist Booking:<span>${formatStatus(client["Psychologist Booking"])}</span></li>
+          <li>Elites Test Booking:<span>${formatStatus(client["Elites Test Booking"])}</span></li>
+          <li>Hiring Meeting:<span>${formatStatus(client["Hiring Company Meeting"])}</span></li>
+          <li><strong>Final Status:</strong><span>${formatStatus(client["Final Status"])}</span></li>
+        </ul>`;
+      } else {
+        out.innerHTML = `<p style="color:red; animation: shake 0.5s;">Client number not found.</p>`;
+      }
+    }
+
+    function formatStatus(value) {
+      if (!value) return `<span class="status-orange">⏳ Not available</span>`;
+      const val = value.trim().toLowerCase();
+
+      const green = ["yes", "booked", "completed", "accepted", "signed", "scheduled", "submitted"];
+      const orange = ["pending", "awaiting signed contract", "in progress"];
+      const red = ["no", "rejected", "not booked", "incomplete", "declined"];
+      const hold = ["on hold", "paused", "hold"];
+
+      if (green.includes(val)) return `<span class="status-green">✅ ${value}</span>`;
+      if (red.includes(val)) return `<span class="status-red">❌ ${value}</span>`;
+      if (hold.includes(val)) return `<span class="status-hold">⏸️ ${value}</span>`;
+      if (orange.includes(val)) return `<span class="status-orange">⏳ ${value}</span>`;
+      return `<span>${value}</span>`;
+    }
+  </script>
+</head>
+
+<body>
+  <header><h1>Track Your Application</h1></header>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="expertise.html">Expertise</a>
+    <a href="application-tracker.html">Track Application</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <main>
+    <h2>Enter Your Client Number</h2>
+    <input type="text" id="clientInput" placeholder="Enter your client application number" />
+    <button onclick="searchClient()">Check Status</button>
+    <div id="statusOutput"></div>
+  </main>
+  <footer>© 2016 Go‑Global Recruitment</footer>
+</body>
+</html>

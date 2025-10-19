@@ -4,7 +4,9 @@
   <meta charset="utf-8" />
   <title>Track Application | Go‑Global Recruitment</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Track your Go‑Global Recruitment application progress by client number.">
+  <meta name="description" content="Track your Go‑Global Recruitment application progress by client number. See the status of CV, contracts, bookings, and more.">
+  <meta name="robots" content="index, follow">
+
   <style>
     body {
       margin: 0;
@@ -49,10 +51,8 @@
       animation: slideUp 0.6s ease;
     }
 
-    h2 {
+    h2, p {
       color: #003366;
-      text-align: center;
-      margin-bottom: 1.5rem;
     }
 
     input[type="text"], button {
@@ -63,9 +63,7 @@
       margin-bottom: 1rem;
     }
 
-    input[type="text"] {
-      border: 1px solid #ccc;
-    }
+    input[type="text"] { border: 1px solid #ccc; }
 
     button {
       background-color: #003366;
@@ -74,50 +72,19 @@
       cursor: pointer;
     }
 
-    #statusOutput ul {
-      list-style: none;
-      padding: 0;
-    }
+    #statusOutput ul { list-style: none; padding: 0; }
 
-    #statusOutput li {
-      padding: 8px 0;
-      border-bottom: 1px solid #ccc;
-      display: flex;
-      justify-content: space-between;
-    }
+    #statusOutput li { padding: 8px 0; border-bottom: 1px solid #ccc; display: flex; justify-content: space-between; }
 
     .status-green { color: #2ecc71; font-weight: bold; animation: fadeIn 1s ease-in-out; }
     .status-orange { color: #f39c12; font-weight: bold; animation: pulse 1.5s infinite; }
     .status-red { color: #e74c3c; font-weight: bold; animation: shake 0.5s; }
     .status-hold { color: #9b59b6; font-weight: bold; animation: pulse 1.5s infinite; }
 
-    @keyframes slideUp {
-      from { transform: translateY(20px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
-
-    @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-5px); }
-      50% { transform: translateX(5px); }
-      75% { transform: translateX(-5px); }
-    }
-
-    footer {
-      margin-top: 2rem;
-      font-size: 0.95rem;
-    }
+    @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+    @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 50% { transform: translateX(5px); } 75% { transform: translateX(-5px); } }
   </style>
 
   <script>
@@ -132,10 +99,7 @@
       const res = await fetch("cleaned_application_tracker.csv");
       const text = await res.text();
       const rows = text.trim().split("\n");
-
-      // Clean BOM and whitespace from headers
       const headers = rows[0].replace(/^\uFEFF/, "").split(",").map(h => h.trim());
-
       clients = rows.slice(1).map(row => {
         const cols = row.split(",");
         const client = {};
@@ -172,12 +136,10 @@
     function formatStatus(value) {
       if (!value) return `<span class="status-orange">⏳ Not available</span>`;
       const val = value.trim().toLowerCase();
-
       const green = ["yes", "booked", "completed", "accepted", "signed", "scheduled", "submitted"];
       const orange = ["pending", "awaiting signed contract", "in progress"];
       const red = ["no", "rejected", "not booked", "incomplete", "declined"];
       const hold = ["on hold", "paused", "hold"];
-
       if (green.includes(val)) return `<span class="status-green">✅ ${value}</span>`;
       if (red.includes(val)) return `<span class="status-red">❌ ${value}</span>`;
       if (hold.includes(val)) return `<span class="status-hold">⏸️ ${value}</span>`;
@@ -189,19 +151,23 @@
 
 <body>
   <header><h1>Track Your Application</h1></header>
+
   <nav>
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
     <a href="expertise.html">Expertise</a>
-    <a href="application-tracker.html">Track Application</a>
+    <a href="track-application.html">Track Application</a>
     <a href="contact.html">Contact</a>
   </nav>
+
   <main>
-    <h2>Enter Your Client Number</h2>
+    <h2>Track Your Application Status</h2>
+    <p>Enter your client application number below to check the current status of your CV, contracts, bookings, and final approval. This ensures you stay updated on your international placement process.</p>
     <input type="text" id="clientInput" placeholder="Enter your client application number" />
     <button onclick="searchClient()">Check Status</button>
     <div id="statusOutput"></div>
   </main>
+
   <footer>© 2016 Go‑Global Recruitment</footer>
 </body>
 </html>

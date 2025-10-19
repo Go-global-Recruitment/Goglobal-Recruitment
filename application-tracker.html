@@ -119,16 +119,16 @@
       if (client) {
         out.innerHTML = `<ul>
           <li>CV Uploaded:<span>${formatStatus(client["CV Uploaded"])}</span></li>
+          <li>Go-Global Service Agreement:<span>${formatStatus(client["Go-Global Service Agreement"])}</span></li>
           <li>Offer Letter:<span>${formatStatus(client["Offer Letter"])}</span></li>
-          <li>Service Agreement:<span>${formatStatus(client["Go-Global Service Agreement"])}</span></li>
           <li>Employment Contract:<span>${formatStatus(client["Employment Contract"])}</span></li>
-          <li>Debtform/Schedule:<span>${formatStatus(client["Debtform/Schedule"])}</span></li>
           <li>Client Service Booking:<span>${formatStatus(client["Client Service booking"])}</span></li>
           <li>Biometrics Booking:<span>${formatStatus(client["Biometrics Booking"])}</span></li>
           <li>Medical Booked:<span>${formatStatus(client["Medical Booked"])}</span></li>
           <li>Psychologist Booking:<span>${formatStatus(client["Psychologist Booking"])}</span></li>
+          <li>Debtform/Schedule:<span>${formatStatus(client["Debtform/Schedule"])}</span></li>
           <li>Elites Test Booking:<span>${formatStatus(client["Elites Test Booking"])}</span></li>
-          <li>Hiring Meeting:<span>${formatStatus(client["Hiring Company Meeting"])}</span></li>
+          <li>Start Date:<span>${formatStatus(client["Start Date"])}</span></li>
           <li><strong>Final Status:</strong><span>${formatStatus(client["Final Status"])}</span></li>
         </ul>`;
       } else {

@@ -126,10 +126,10 @@
           <li>Biometrics Booking:<span>${formatStatus(client["Biometrics Booking"])}</span></li>
           <li>Medical Booked:<span>${formatStatus(client["Medical Booked"])}</span></li>
           <li>Psychologist Booking:<span>${formatStatus(client["Psychologist Booking"])}</span></li>
-          <li>Debtform/Schedule:<span class="status-red">${client["Debtform/Schedule"]}</span></li>
+          <li>Debtform/Schedule:<span class="status-red">${client["Debtform/Schedule"] || 'Not Available'}</span></li>
           <li>Elites Test Booking:<span>${formatStatus(client["Elites Test Booking"])}</span></li>
           <li>Start Date:<span>${formatStatus(client["Start Date"])}</span></li>
-          <li><strong>Final Status:</strong><span class="status-red">${client["Final Status"]}</span></li>
+          <li><strong>Final Status:</strong><span class="status-red">${client["Final Status"] || 'Pending'}</span></li>
         </ul>`;
       } else {
         out.innerHTML = `<p style="color:red; animation: shake 0.5s;">Client number not found.</p>`;

@@ -5,8 +5,9 @@
   <title>Go‑Global Recruitment | International Job Placement</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="Go‑Global Recruitment connects skilled professionals across Africa with global job opportunities in the UK, Canada, and more. Empowering Talent. Enabling Journeys.">
+  <meta name="robots" content="index, follow">
   
-  <!-- ✅ Google Search Console verification tag -->
+  <!-- Google Search Console -->
   <meta name="google-site-verification" content="1u8_ihw77xsxUmOT4BQJb7b7SkA2OflVCSlfh6us2e0" />
 
   <style>
@@ -19,7 +20,6 @@
       opacity: 0;
       transition: opacity 0.6s ease-in;
     }
-
     body.fade-in { opacity: 1; }
 
     .site-header {
@@ -27,7 +27,6 @@
       padding: 1rem 0;
       border-bottom: 1px solid #cccccc;
     }
-
     .container {
       max-width: 1200px;
       margin: 0 auto;
@@ -37,23 +36,13 @@
       align-items: center;
       flex-wrap: wrap;
     }
-
-    .logo-link {
-      display: inline-block;
-    }
-
-    .site-logo {
-      height: 50px;
-      width: auto;
-      max-width: 100%;
-    }
+    .logo-link img { height: 50px; width: auto; max-width: 100%; }
 
     .nav-menu {
       display: flex;
       gap: 20px;
       flex-wrap: wrap;
     }
-
     .nav-menu a {
       text-decoration: none;
       color: #003366;
@@ -61,10 +50,7 @@
       font-size: 1.1em;
       transition: color 0.3s ease;
     }
-
-    .nav-menu a:hover {
-      color: #0077cc;
-    }
+    .nav-menu a:hover { color: #0077cc; }
 
     .hero {
       background-color: #003366;
@@ -72,64 +58,23 @@
       padding: 4rem 1rem;
       text-align: center;
     }
+    .hero h1 { font-size: 3em; margin-bottom: 0.5rem; }
+    .hero p { font-size: 1.3em; margin: 0; }
 
-    .hero h1 {
-      font-size: 3em;
-      margin-bottom: 0.5rem;
-    }
-
-    .hero p {
-      font-size: 1.3em;
-      margin: 0;
-    }
-
-    .section {
-      max-width: 1000px;
-      margin: 60px auto;
-      padding: 0 20px;
-      animation: fadeInUp 0.8s ease-out both;
-    }
+    .section { max-width: 1000px; margin: 60px auto; padding: 0 20px; animation: fadeInUp 0.8s ease-out both; }
 
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .features, .stats {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: space-between;
-    }
+    .features, .stats { display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; }
+    .card { background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); flex: 1 1 30%; padding: 1.5rem; text-align: center; transition: transform 0.3s ease; }
+    .card:hover { transform: translateY(-5px); }
+    .card h3 { color: #003366; }
 
-    .card {
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      flex: 1 1 30%;
-      padding: 1.5rem;
-      text-align: center;
-      transition: transform 0.3s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-    }
-
-    .card h3 {
-      color: #003366;
-    }
-
-    .stat-box {
-      text-align: center;
-      flex: 1;
-    }
-
-    .stat-box span {
-      font-size: 2.4rem;
-      font-weight: bold;
-      color: #003366;
-    }
+    .stat-box { text-align: center; flex: 1; }
+    .stat-box span { font-size: 2.4rem; font-weight: bold; color: #003366; }
 
     footer {
       text-align: center;
@@ -142,34 +87,11 @@
     }
 
     @media (max-width: 768px) {
-      .features, .stats {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .nav-menu {
-        flex-direction: column;
-        gap: 10px;
-        align-items: center;
-        margin-top: 10px;
-      }
-
-      .container {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .site-logo {
-        margin-bottom: 10px;
-      }
-
-      .hero h1 {
-        font-size: 2.2rem;
-      }
-
-      .hero p {
-        font-size: 1.1rem;
-      }
+      .features, .stats { flex-direction: column; align-items: center; }
+      .nav-menu { flex-direction: column; gap: 10px; align-items: center; margin-top: 10px; }
+      .container { flex-direction: column; align-items: center; }
+      .hero h1 { font-size: 2.2rem; }
+      .hero p { font-size: 1.1rem; }
     }
   </style>
 
@@ -214,13 +136,13 @@
   <div class="site-header">
     <div class="container">
       <a href="index.html" class="logo-link">
-        <img src="goglobal-logo-header.svg" alt="Go-Global Logo" class="site-logo" />
+        <img src="goglobal-logo-header.svg" alt="Go-Global Logo" />
       </a>
       <nav class="nav-menu">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="expertise.html">Expertise</a>
-        <a href="application-tracker.html">Track Application</a>
+        <a href="track-application.html">Track Application</a>
         <a href="contact.html">Contact</a>
       </nav>
     </div>

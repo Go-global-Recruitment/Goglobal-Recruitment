@@ -1,21 +1,21 @@
-const CACHE_NAME = 'goglobal-cache-v1';
+const CACHE_NAME = 'goglobal-cache-v2';
+// Use relative paths so it works under GitHub Pages project sites
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/about.html',
-  '/expertise.html',
-  '/contact.html',
-  '/application-tracker.html',
-  '/thank-you.html',
-  '/manifest.json',
-  '/cleaned_application_tracker.csv',
-  '/icon-192.png',
-  '/icon-512.png',
-  '/home-background.jpg',
-  '/goglobal-logo-header.svg',
-  '/robots.txt',
-  '/sitemap.xml',
-  '/google068621c9101086af.html'
+  './index.html',
+  './about.html',
+  './expertise.html',
+  './contact.html',
+  './application-tracker.html',
+  './thank-you.html',
+  './manifest.json',
+  './cleaned_application_tracker.csv',
+  './icon-192.png',
+  './icon-512.png',
+  './home-background.jpg',
+  './goglobal-logo-header.svg',
+  './robots.txt',
+  './sitemap.xml',
+  './google068621c9101086af.html'
 ];
 
 self.addEventListener('install', event => {
@@ -69,7 +69,10 @@ self.addEventListener('fetch', event => {
           caches.open(CACHE_NAME).then(cache => cache.put(req, copy));
           return res;
         })
-        .catch(() => caches.match('/index.html'));
+        .catch(() => {
+          const indexUrl = new URL('index.html', self.registration.scope).href;
+          return caches.match(indexUrl);
+        });
     })
   );
 });

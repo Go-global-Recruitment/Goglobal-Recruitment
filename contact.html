@@ -151,11 +151,19 @@
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js')
+        navigator.serviceWorker.register('service-worker.js')
           .then(reg => console.log('Service Worker registered', reg))
           .catch(err => console.log('Service Worker failed', err));
       });
     }
+    // Ensure Formspree redirect goes to the current site path (works locally and on GitHub Pages)
+    (function(){
+      const nextField = document.querySelector('input[name="_next"]');
+      if (nextField) {
+        const base = window.location.origin + window.location.pathname.replace(/[^/]*$/, '');
+        nextField.value = base + 'thank-you.html';
+      }
+    })();
   </script>
 </body>
 </html>
